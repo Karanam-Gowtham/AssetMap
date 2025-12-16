@@ -25,11 +25,13 @@
             color: white;
             cursor: pointer;
         }
-        ul {
+        .tree {
             margin-top: 20px;
             background: #020617;
-            padding: 10px;
+            padding: 15px;
             border: 1px solid #334155;
+            font-family: monospace;
+            white-space: pre;
         }
     </style>
 </head>
@@ -42,13 +44,37 @@
 <br>
 <button onclick="analyze()">Analyze</button>
 
-<ul id="output"></ul>
+<div class="tree" id="output"></div>
 
 <script>
+function renderTree(tree, prefix = "") {
+    let output = "";
+    const keys = Object.keys(tree);
+
+    keys.forEach((key, index) => {
+        const isLast = index === keys.length - 1;
+        const branch = isLast ? "└── " : "├── ";
+
+        output += prefix + branch + key + "\n";
+
+        const children = tree[key];
+        if (children && children.length > 0) {
+            const newPrefix = prefix + (isLast ? "    " : "│   ");
+            children.forEach((child, i) => {
+                const childLast = i === children.length - 1;
+                const childBranch = childLast ? "└── " : "├── ";
+                output += newPrefix + childBranch + child + "\n";
+            });
+        }
+    });
+
+    return output;
+}
+
 function analyze() {
     const code = document.getElementById("code").value;
     const output = document.getElementById("output");
-    output.innerHTML = "";
+    output.textContent = "Analyzing...";
 
     fetch("/analyze", {
         method: "POST",
@@ -56,12 +82,8 @@ function analyze() {
         body: JSON.stringify({ code: code })
     })
     .then(res => res.json())
-    .then(files => {
-        files.forEach(f => {
-            const li = document.createElement("li");
-            li.textContent = f;
-            output.appendChild(li);
-        });
+    .then(tree => {
+        output.textContent = renderTree(tree);
     });
 }
 </script>
