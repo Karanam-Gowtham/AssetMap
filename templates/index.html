@@ -47,30 +47,6 @@
 <div class="tree" id="output"></div>
 
 <script>
-function renderTree(tree, prefix = "") {
-    let output = "";
-    const keys = Object.keys(tree);
-
-    keys.forEach((key, index) => {
-        const isLast = index === keys.length - 1;
-        const branch = isLast ? "└── " : "├── ";
-
-        output += prefix + branch + key + "\n";
-
-        const children = tree[key];
-        if (children && children.length > 0) {
-            const newPrefix = prefix + (isLast ? "    " : "│   ");
-            children.forEach((child, i) => {
-                const childLast = i === children.length - 1;
-                const childBranch = childLast ? "└── " : "├── ";
-                output += newPrefix + childBranch + child + "\n";
-            });
-        }
-    });
-
-    return output;
-}
-
 function analyze() {
     const code = document.getElementById("code").value;
     const output = document.getElementById("output");
@@ -79,11 +55,45 @@ function analyze() {
     fetch("/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: code })
+        body: JSON.stringify({ code })
     })
     .then(res => res.json())
-    .then(tree => {
-        output.textContent = renderTree(tree);
+    .then(data => {
+        let text = "";
+        let prevKey = null;
+        let prevDisplay = null;
+        let count = 0;
+
+        data.forEach(item => {
+            const key = item.type === "DB_TABLE"
+                ? `DB_TABLE:${item.table}`
+                : `${item.type}:${item.path}`;
+
+            const display = item.type === "DB_TABLE"
+                ? `[LINE ${item.line}] DB_TABLE -> ${item.table}`
+                : `[LINE ${item.line}] ${item.type} -> ${item.path}`;
+
+            if (key === prevKey) {
+                count++;
+            } else {
+                if (prevDisplay !== null) {
+                    text += count > 1
+                        ? `${prevDisplay} (${count})\n`
+                        : `${prevDisplay}\n`;
+                }
+                prevKey = key;
+                prevDisplay = display;
+                count = 1;
+            }
+        });
+
+        if (prevDisplay !== null) {
+            text += count > 1
+                ? `${prevDisplay} (${count})\n`
+                : `${prevDisplay}\n`;
+        }
+
+        output.textContent = text;
     });
 }
 </script>
