@@ -51,14 +51,17 @@ In real-world projects:
 
 ## 🗂️ Project Structure
 
+To ensure the structure renders the same in edit and preview, it is placed inside a fenced code block:
+
+```text
 assetmap/
 │
-├── modules/ # Feature-based modules
-├── assets/ # Static assets
-├── temp/ # Temporary / test files
-├── config/ # Configuration files
+├── modules/    # Feature-based modules
+├── assets/     # Static assets
+├── temp/       # Temporary / test files
+├── config/     # Configuration files
 └── README.md
-
+```
 
 ---
 
@@ -97,30 +100,18 @@ assetmap/
 
 ## 🚀 Setup Instructions
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-2.Move the project to your local server directory (for example, htdocs)
-3.Start Apache using XAMPP
-4.Open in browser
+1. Clone the repository:
 
-📝 Update Log
+```bash
+git clone https://github.com/Karanam-Gowtham/AssetMap.git
+```
 
-⚠️ Always append new updates below. Do not modify older entries.
+2. Move the project to your local server directory (for example, htdocs).
+3. Start Apache using XAMPP.
+4. Open the project in your browser (e.g. http://localhost/assetmap).
 
-🔹 Version 1.0
+---
 
-Initial release
+## 🤝 Contribution
 
-Basic asset scanning implemented
-
-🔹 Version 1.1
-
-Improved detection accuracy
-
-Added line-number tracking
-
-🤝 Contribution
-
-Contributions, suggestions, and improvements are welcome.
-Feel free to fork the repository and submit a pull request.
+Contributions, suggestions, and improvements are welcome. Feel free to fork the repository and submit a pull request.
