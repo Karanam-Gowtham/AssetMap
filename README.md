@@ -1,14 +1,117 @@
-**AssetMap — Project Description**
+# 🔍 AssetMap
 
-Assetmap is a static code analysis utility designed to automatically discover and catalog asset dependencies referenced within source code. When a user submits program code—such as HTML, CSS, JavaScript, PHP, or similar files—Assetmap scans the content and extracts all locally referenced assets and internal links.
+**AssetMap** is a lightweight code analysis tool designed to scan a project and list all assets referenced in the source code.  
+It helps developers quickly understand dependencies, resource usage, and file relationships within a codebase.
 
-The tool identifies resources including images, stylesheets, script files, fonts, media files, and other file-based dependencies that are explicitly mentioned in the codebase. External CDN resources and third-party library links (for example, Bootstrap or hosted frameworks) can be excluded by design, allowing teams to focus strictly on project-owned assets.
+---
 
-Assetmap produces a structured inventory of these dependencies, enabling developers to:
+## 🎯 Project Objective
 
-* Understand asset usage and relationships across files
-* Detect missing, unused, or incorrectly referenced resources
-* Simplify refactoring, migration, or deployment processes
-* Improve maintainability and consistency of project structure
+The primary objectives of AssetMap are:
 
-In essence, Assetmap acts as a dependency visibility layer for static assets, helping developers map, audit, and manage their codebase resources with clarity and precision.
+- 📁 Identify all assets referenced in a project  
+- 🔗 Provide a clear mapping of links and dependencies  
+- 🧩 Simplify maintenance and refactoring tasks  
+- ⏱️ Reduce time spent on manual asset tracking  
+
+---
+
+## 📌 What AssetMap Detects
+
+AssetMap currently detects:
+
+- 🔗 Internal file links  
+- 🖼️ Image references  
+- 📜 Script and stylesheet references  
+- 🧩 PHP `include` and `require` statements  
+- 📂 Module and relative path dependencies  
+
+---
+
+## 💡 Why AssetMap?
+
+In real-world projects:
+
+- Assets are scattered across multiple files  
+- Broken or unused assets are hard to detect  
+- Manual inspection is slow and error-prone  
+
+✅ **AssetMap automates this process** by extracting asset references and presenting them in a single, consolidated view.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend:** PHP  
+- **Frontend:** HTML, CSS  
+- **Server:** Apache (XAMPP)  
+- **Version Control:** Git  
+
+---
+
+## 🗂️ Project Structure
+
+To ensure the structure renders the same in edit and preview, it is placed inside a fenced code block:
+
+```text
+assetmap/
+│
+├── modules/    # Feature-based modules
+├── assets/     # Static assets
+├── temp/       # Temporary / test files
+├── config/     # Configuration files
+└── README.md
+```
+
+---
+
+## ⚙️ How It Works
+
+1. 📄 Scans source files line by line  
+2. 🔍 Detects asset references such as:
+   - Links  
+   - Images  
+   - Includes  
+3. 🧾 Records each asset with:
+   - File name  
+   - Line number  
+   - Asset path  
+4. 📊 Displays results in a readable format  
+
+---
+
+## ✅ Current Features
+
+- 🔍 Asset extraction from source code  
+- 📍 Line-level reference tracking  
+- 🧹 Organized output for easy analysis  
+
+---
+
+## 🧪 Use Cases
+
+- 🧠 Understanding legacy projects  
+- 🛠️ Debugging missing or broken assets  
+- 🚀 Preparing projects for deployment  
+- 🧹 Code cleanup and refactoring  
+- 📘 Learning project asset flow  
+
+---
+
+## 🚀 Setup Instructions
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Karanam-Gowtham/AssetMap.git
+```
+
+2. Move the project to your local server directory (for example, htdocs).
+3. Start Apache using XAMPP.
+4. Open the project in your browser (e.g. http://localhost/assetmap).
+
+---
+
+## 🤝 Contribution
+
+Contributions, suggestions, and improvements are welcome. Feel free to fork the repository and submit a pull request.
